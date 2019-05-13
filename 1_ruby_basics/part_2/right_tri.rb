@@ -1,9 +1,9 @@
 print "Введите первую сторону треугольника: "
-first = gets.chomp.to_i
+first = gets.chomp.to_f
 print "Введите вторую сторону треугольника: "
-second = gets.chomp.to_i
+second = gets.chomp.to_f
 print "Введите третью сторону треугольника: "
-third = gets.chomp.to_i
+third = gets.chomp.to_f
 
 puts
 if first == second && first == third
