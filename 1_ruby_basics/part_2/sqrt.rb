@@ -9,7 +9,7 @@ puts
 d = b**2 - (4 * a * c)
 
 if d > 0
-  x =Math.sqrt(d)
+  x = Math.sqrt(d)
   x1 = (-b + x)/(2 * a)
   x2 = (-b - x)/(2 * a)
   puts "Уравнение имеет два корня #{x1} и #{x2}, дискриминант #{d}"
