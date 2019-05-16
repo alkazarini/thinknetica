@@ -10,19 +10,17 @@ break if name.downcase == 'stop'
 puts "Введите цену за ед.: "
 price = gets.chomp.to_f
 puts "Введите кол-во товара: "
-qty = gets.chomp.to_f
+quantity = gets.chomp.to_f
 
-goods[name] = { pr: price, q: qty }
+goods[name] = { a: price, b: quantity }
 end
 
 system "clear" 
-goods.each do |name, prq|
-  sum = prq[:pr] * prq[:q] 
-  print name + '  ' + prq[:pr].to_s + '  ' +  prq[:q].to_s + '  Сумма:' + sum.to_s
+goods.each do |name, price_quantity|
+  sum = price_quantity[:a] * price_quantity[:b] 
+  print name + '  ' + price_quantity[:a].to_s + '  ' +  price_quantity[:b].to_s + '  Сумма: ' + sum.to_s
   puts
   basket_sum += sum
 end
 
 puts "\nОбщая сумма покупок: #{basket_sum}"   
-
-
