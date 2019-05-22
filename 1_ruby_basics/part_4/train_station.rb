@@ -21,7 +21,7 @@ class  Train
   end
 
   def stop
-    if @speed = 0
+    if @speed == 0
       puts "Поезд уже стоит."
     esle
       @speed = 0
@@ -47,7 +47,27 @@ class  Train
     end
   end
 
-  def train_route
+  def train_route(route)
+    @parked = true
+    @route = route.list
+    @station = route.first
+    puts "Поезд #{number} получил маршрут"
+  end
+
+  def move
+    unless @parked == true & next_station
+      @station = next_station
+      speed = 0
+      puts "Поезд #{number} прибыл на станцию #{@station}."
+    else
+      puts "Поезд #{number} не может двигаться."
+    end
+  end
+
+  def next_station
+    route[route.index(@station) + 1]
+  end
+end
 
 class Route
   attr_accessor :route
@@ -101,17 +121,11 @@ class Station
   end
 
   def train_list_type
-    train_list.each_do |train|
+      cargo, passenger = 0
+    train_list.each do |train|
       cargo  += 1 if train.type == 1
       passenger += 1 if train.type == 2
     end
     puts "На станции: #{cargo} грузовых и #{passenger} пассажирских поездов."
   end
-
-
-  end
-
-
-
-
-
+end
