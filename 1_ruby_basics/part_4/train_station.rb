@@ -99,7 +99,7 @@ end
 
 class Station
 
-  attr_accessor :train_list, :name_station
+  attr_accessor :train_list, :station_name
 
   def initialize(name)
     @station_name = name
@@ -108,20 +108,19 @@ class Station
   end
 
   def arrival(train)
-    train.parked = true
     train_list.push(train)
-    puts "Поезд #{train.number} прибыл на станцию #{name_station}."
+    puts "Поезд #{train} прибыл на станцию #{station_name}."
+    self
   end
 
   def departure(train)
-    train.parked = false
-    train.speed = 50
     train_list.delete(train)
-    puts "Поезд #{train.number} отправился со станции #{name_station}."
+    puts "Поезд #{train} отправился со станции #{station_name}."
+    self
   end
 
   def train_list_type
-      cargo, passenger = 0
+      cargo, passenger = 0, 0
     train_list.each do |train|
       cargo  += 1 if train.type == 1
       passenger += 1 if train.type == 2
