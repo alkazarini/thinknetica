@@ -1,70 +1,51 @@
 class  Train
-  attr_accessor :speed, :route, :parked
-  attr_reader :length, :type, :station, :number
+  attr_reader :length, :type, :station, :number, :speed
 
   def initialize(number, type, length)
     @type = type
     @number = number
     @length = length
     @speed = 0
-    puts "Создан новый поезд №#{@number}."
   end
 
   def speed_up
     @speed + 5
-    puts "Скорость поезда увеличена на 5 км/ч."
   end
 
   def speed_down
-    @speed - 5
-    puts "Скорость поезда понижена на 5 км/ч."
+    @speed - 5 if @speed > 0
   end
 
   def stop
-    if @speed == 0
-      puts "Поезд уже стоит."
-    esle
-      @speed = 0
-      puts "Поезд остановлен."
-    end
+    @speed = 0
   end
 
   def add_wagon
-    if @speed == 0
-      @length += 1
-      puts "Добавлен 1 вагон. Теперь в поезде #{@length} вагонов."
-    else
-      puts "Поезд движется. Нельзя добавить вагон."
-    end
+    @length += 1 if @speed == 0
   end
 
   def delete_wagon
-    if @speed == 0 && length > 0
-      @length -= 1
-      puts "Убран 1 вагон. Теперь вагонов #{@length}."
-    else
-      puts "Поезд движется или у него нет вагонов. Нельзя убрать вагон."
-    end
+    @length -= 1 if @length > 0 && speed == 0
   end
 
   def train_route(route)
-    @parked = true
-    @route = route.list
-    @station = route.first
-    puts "Поезд #{number} получил маршрут"
+    @route = route.stations
+    @station = route.stations.first
   end
 
-  def move
-    unless @parked == true & next_station
-      @station = next_station
-      speed = 0
-      puts "Поезд #{number} прибыл на станцию #{@station}."
-    else
-      puts "Поезд #{number} не может двигаться."
-    end
+  def move_forward
+    @station = next_station
+  end
+
+  def move_backward
+    @station = previous_station
   end
 
   def next_station
-    route[route.index(@station) + 1]
+    @route[@route.index(@station) + 1]
+  end
+
+  def previous_station
+    @route[@route.index(@station) - 1]
   end
 end

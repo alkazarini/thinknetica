@@ -1,27 +1,15 @@
 class Route
-  attr_accessor :route
+  attr_reader :stations
   
-  def initialize(first,last)
-    @route = [first,last]
+  def initialize(first, last)
+    @stations = [first, last]
   end
 
   def add_station(station)
-    route.insert(-2, station)
+    stations.insert(-2, station)
   end
 
   def remove_station(station)
-    route.delete(station)
-  end
-
-  def list
-    @route
-  end
-
-  def first
-    route.first
-  end
-
-  def last
-    route.last
+    stations.delete(station)
   end
 end
