@@ -28,7 +28,7 @@ class  Train
     @length -= 1 if @length > 0 && speed == 0
   end
 
-  def train_route(route)
+  def take_route(route)
     @route = route.stations
     @station = route.stations.first
   end
@@ -42,10 +42,10 @@ class  Train
   end
 
   def next_station
-    @route[@route.index(@station) + 1]
+    (@route.index(@station) + 1) != nil ? (@route[@route.index(@station) + 1]) : (@station)
   end
 
   def previous_station
-    @route[@route.index(@station) - 1]
+    (@route.index(@station) - 1) > 0 ? (@route[@route.index(@station) - 1]) : (@station)
   end
 end
