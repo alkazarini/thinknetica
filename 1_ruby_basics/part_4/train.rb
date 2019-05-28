@@ -38,14 +38,14 @@ class  Train
   end
 
   def move_backward
-    @station = previous_station
+    @station = previous_station if previous_station != nil 
   end
 
   def next_station
-    (@route.index(@station) + 1) != nil ? (@route[@route.index(@station) + 1]) : (@station)
+    (@route.index(@station) + 1) < @route.size ? (@route[@route.index(@station) + 1]) : (@station)
   end
 
   def previous_station
-    (@route.index(@station) - 1) > 0 ? (@route[@route.index(@station) - 1]) : (@station)
+    (@route.index(@station) - 1) >=0 ? (@route[@route.index(@station) - 1]) : nil
   end
 end
