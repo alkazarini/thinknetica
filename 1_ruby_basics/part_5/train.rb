@@ -1,10 +1,8 @@
-class  Train
+class Train
   attr_reader :length, :type, :station, :number, :speed
 
-  def initialize(number, type, length)
-    @type = type
+  def initialize(number)
     @number = number
-    @length = length
     @speed = 0
   end
 
@@ -13,7 +11,7 @@ class  Train
   end
 
   def speed_down
-    @speed - 5 if @speed > 0
+    @speed - 5 if @speed.positive?
   end
 
   def stop
@@ -21,11 +19,11 @@ class  Train
   end
 
   def add_wagon
-    @length += 1 if @speed == 0
+    @length += 1 if @speed.zero?
   end
 
   def delete_wagon
-    @length -= 1 if @length > 0 && speed == 0
+    @length -= 1 if @length.positive? && speed.zero?
   end
 
   def take_route(route)
@@ -38,14 +36,14 @@ class  Train
   end
 
   def move_backward
-    @station = previous_station if previous_station 
+    @station = previous_station if previous_station
   end
 
   def next_station
-    @route[@route.index(@station) + 1] if @route.index(@station) -1 < @route.size
+    @route[@route.index(@station) + 1] if @route.index(@station) - 1 < @route.size
   end
 
   def previous_station
-    @route[@route.index(@station) - 1] if @route.index(@station) - 1 > 0 
+    @route[@route.index(@station) - 1] if (@route.index(@station) - 1).positive?
   end
 end
