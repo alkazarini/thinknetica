@@ -4,6 +4,7 @@ class Train
   def initialize(number)
     @number = number
     @speed = 0
+    @wagons = []
   end
 
   def speed_up
@@ -18,12 +19,12 @@ class Train
     @speed = 0
   end
 
-  def add_wagon
-    @length += 1 if @speed.zero?
+  def add_wagon(wagon)
+    @wagons << wagon if @type == wagon.type && @speed.zero?
   end
 
-  def delete_wagon
-    @length -= 1 if @length.positive? && speed.zero?
+  def delete_wagon(wagon)
+    @wagons.delete_at.last if speed.zero?
   end
 
   def take_route(route)
