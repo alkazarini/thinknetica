@@ -15,7 +15,7 @@ puts "01. Создать станцию\n02. Создать поезд\n03. Со
 
 choice = gets.chomp.to_i
 
-until choice == 15
+until choice == 13
   case choice
   when 1
     puts "Введите название станции: "
@@ -69,12 +69,23 @@ until choice == 15
     puts "Введите номер поезда: "
     train = gets.chomp.to_i
     puts "Введите номер вагона: "
-    wagon =
-    end
-
-
-
-
-    
+    wagon = gets.to_i
+    train.delete_wagon(train.wagons[wagon])
+  when 9
+    puts "Введите номер поезда: "
+    train = gets.chomp.to_i
+    puts "Станция: #{train.next_station}"
+    train.move_forward
+  when 10
+    puts "Введите номер поезда: "
+    train = gets.chomp.to_i
+    puts "Станция: #{train.previous_station}"
+    train.move_backward
+  when 11
+    puts stations_arr
+  when 12
+    puts trains_arr
   end
+
+  choice = gets.chomp.to_i
 end
