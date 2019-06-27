@@ -47,4 +47,8 @@ class Train
   def previous_station
     @route[@route.index(@station) - 1] if (@route.index(@station) - 1).positive?
   end
+
+  def to_s
+    [number, type].join(" > ")
+  end
 end

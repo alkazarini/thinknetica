@@ -3,6 +3,6 @@ require_relative 'train'
 class CargoTrain < Train
   def initialize(number)
     super
-    @type = 0
+    @type = "Грузовой"
   end
 end
