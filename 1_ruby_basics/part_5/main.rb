@@ -9,7 +9,6 @@ require_relative './station.rb'
 stations_arr = []
 trains_arr = []
 routes_arr = []
-wagons_arr = []
 
 def list_array(arr)
   arr.each.with_index(1) do |item, index|
@@ -61,7 +60,7 @@ until choice == 13
     route.remove_station(del_station)
   when 6
     puts "Выберите поезд: "
-    list_array(trains_arr) 
+    list_array(trains_arr)
     idx = gets.chomp.to_i
     train = trains_arr[idx - 1]
     puts "Выберите маршрут: "
@@ -91,7 +90,7 @@ until choice == 13
     list_array(trains_arr)
     train = trains_arr[gets.chomp.to_i - 1]
     train.move_forward
-    puts "Станция: #{train.station}"  
+    puts "Станция: #{train.station}"
   when 10
     puts "Введите номер поезда: "
     list_array(trains_arr)
@@ -106,4 +105,3 @@ until choice == 13
 
   choice = gets.chomp.to_i
 end
-
