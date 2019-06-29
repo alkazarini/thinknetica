@@ -23,7 +23,7 @@ class Train
     @wagons << wagon if @type == wagon.type && @speed.zero?
   end
 
-  def delete_wagon(wagon)
+  def delete_wagon
     @wagons.delete_at.last if speed.zero?
   end
 
@@ -45,7 +45,7 @@ class Train
   end
 
   def previous_station
-    @route[@route.index(@station) - 1] if (@route.index(@station) - 1).positive?
+    @route[@route.index(@station) - 1] if @route.index(@station) - 1 >= 0
   end
 
   def to_s

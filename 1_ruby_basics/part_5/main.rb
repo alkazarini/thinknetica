@@ -73,8 +73,7 @@ until choice == 13
     puts "Введите номер поезда: "
     list_array(trains_arr)
     train = trains_arr[gets.chomp.to_i - 1]
-    puts train
-    puts "Выберите тип вагона: "
+    puts "Выберите тип вагона (1 - пассажирский, 2 - грузовой): "
     wagon = gets.to_i
     case wagon
     when 1
@@ -84,24 +83,25 @@ until choice == 13
     end
   when 8
     puts "Введите номер поезда: "
-    train = gets.chomp.to_i
-    puts "Введите номер вагона: "
-    wagon = gets.to_i
-    train.delete_wagon(train.wagons[wagon])
+    list_array(trains_arr)
+    train = trains_arr[gets.chomp.to_i - 1]
+    train.delete_wagon
   when 9
     puts "Введите номер поезда: "
-    train = gets.chomp.to_i
-    puts "Станция: #{train.next_station}"
+    list_array(trains_arr)
+    train = trains_arr[gets.chomp.to_i - 1]
     train.move_forward
+    puts "Станция: #{train.station}"  
   when 10
     puts "Введите номер поезда: "
-    train = gets.chomp.to_i
-    puts "Станция: #{train.previous_station}"
+    list_array(trains_arr)
+    train = trains_arr[gets.chomp.to_i - 1]
     train.move_backward
+    puts "Станция: #{train.station}"
   when 11
     list_array(stations_arr)
   when 12
-    list_array(trains_arr)
+    list_array(station.train_list)
   end
 
   choice = gets.chomp.to_i
