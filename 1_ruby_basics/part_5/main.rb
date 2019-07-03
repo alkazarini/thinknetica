@@ -8,15 +8,17 @@ require_relative './station.rb'
 
 class Main
   def initialize
-    @stations_arr = []
-    @trains_arr = []
-    @routes_arr = []
+    @stations = []
+    @trains = []
+    @routes = []
   end
+
+  private
 
   def new_station
     puts "Введите название станции: "
     station_name = gets.chomp
-    @stations_arr << Station.new(station_name)
+    @stations << Station.new(station_name)
     puts "Добавлена станция #{station_name}"
   end
 
@@ -25,8 +27,8 @@ class Main
     number = gets.chomp
     puts "Введите тип поезда (пассажирский - 1, грузовой - 2): "
     type_train = gets.chomp.to_i
-    @trains_arr << PassengerTrain.new(number) if type_train == 1
-    @trains_arr << CargoTrain.new(number) if type_train == 2
+    @trains << PassengerTrain.new(number) if type_train == 1
+    @trains << CargoTrain.new(number) if type_train == 2
   end
 
   def new_route
@@ -34,13 +36,13 @@ class Main
     first_station = gets.chomp
     puts "Введите последнюю станцию маршрута: "
     last_station = gets.chomp
-    @routes_arr << Route.new(first_station, last_station)
+    @routes << Route.new(first_station, last_station)
   end
 
   def add_route_station
     puts "Выберите маршрут: "
-    list_array(@routes_arr)
-    route = @routes_arr[gets.chomp.to_i - 1]
+    list_array(@routes)
+    route = @routes[gets.chomp.to_i - 1]
     puts "Введите станцию, которую нужно добавить: "
     new_station = gets.chomp
     route.add_station(new_station)
@@ -48,8 +50,8 @@ class Main
 
   def remove_route_station
     puts "Выберите маршрут: "
-    list_array(@routes_arr)
-    route = @routes_arr[gets.chomp.to_i - 1]
+    list_array(@routes)
+    route = @routes[gets.chomp.to_i - 1]
     puts "Выберите станцию для удаления: "
     list_array(route.stations)
     del_station = route.stations[gets.chomp.to_i - 1]
@@ -58,18 +60,18 @@ class Main
 
   def train_take_route
     puts "Выберите поезд: "
-    list_array(@trains_arr)
-    train = @trains_arr[gets.chomp.to_i - 1]
+    list_array(@trains)
+    train = @trains[gets.chomp.to_i - 1]
     puts "Выберите маршрут: "
-    list_array(@routes_arr)
-    route = @routes_arr[gets.chomp.to_i - 1]
+    list_array(@routes)
+    route = @routes[gets.chomp.to_i - 1]
     train.take_route(route)
   end
 
   def train_add_wagon
     puts "Введите номер поезда: "
-    list_array(@trains_arr)
-    train = @trains_arr[gets.chomp.to_i - 1]
+    list_array(@trains)
+    train = @trains[gets.chomp.to_i - 1]
     puts "Выберите тип вагона (1 - пассажирский, 2 - грузовой): "
     wagon = gets.to_i
     case wagon
@@ -82,25 +84,31 @@ class Main
 
   def train_remove_wagon
     puts "Введите номер поезда: "
-    list_array(@trains_arr)
-    train = @trains_arr[gets.chomp.to_i - 1]
+    list_array(@trains)
+    train = @trains[gets.chomp.to_i - 1]
     train.delete_wagon
   end
 
   def train_move_forward
     puts "Введите номер поезда: "
-    list_array(@trains_arr)
-    train = @trains_arr[gets.chomp.to_i - 1]
+    list_array(@trains)
+    train = @trains[gets.chomp.to_i - 1]
     train.move_forward
     puts "Станция: #{train.station}"
   end
 
   def train_move_backward
     puts "Введите номер поезда: "
-    list_array(@trains_arr)
-    train = @trains_arr[gets.chomp.to_i - 1]
+    list_array(@trains)
+    train = @trains[gets.chomp.to_i - 1]
     train.move_backward
     puts "Станция: #{train.station}"
+  end
+
+  def list_array(arr)
+    arr.each.with_index(1) do |item, index|
+      puts "#{index}: #{item}"
+    end
   end
 
   def instructions
@@ -110,6 +118,8 @@ class Main
     puts "11. Просмотреть список станций\n12. Просмотреть список поездов на станции\n13. Выход"
     puts
   end
+
+  public
 
   def menu
 
@@ -141,7 +151,7 @@ class Main
       when 10
         train_move_backward
       when 11
-        list_array(@stations_arr)
+        list_array(@stations)
       when 12
         list_array(station.train_list)
       end
@@ -150,14 +160,6 @@ class Main
     end
   end
 
-  private
-
-# Метод приватный, так как используется только в классе Main
-  def list_array(arr)
-    arr.each.with_index(1) do |item, index|
-      puts "#{index}: #{item}"
-    end
-  end
 end
 
 execute = Main.new
