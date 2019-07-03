@@ -3,6 +3,6 @@ require_relative 'train'
 class PassengerTrain < Train
   def initialize(number)
     super
-    @type = "Пассажирский"
+    @type = :passenger
   end
 end
