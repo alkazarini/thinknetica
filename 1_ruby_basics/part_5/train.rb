@@ -1,10 +1,22 @@
+require_relative './manufacturer.rb'
+require_relative './instance_counter.rb'
+
 class Train
+  include Manufacturer
+  include InstanceCounter
   attr_reader :length, :type, :station, :number, :speed
+
+  @@trains = []
 
   def initialize(number)
     @number = number
     @speed = 0
     @wagons = []
+    @@trains << self
+  end
+
+  def self.find(number)
+    @@trains[number + 1]
   end
 
   def speed_up
