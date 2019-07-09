@@ -30,4 +30,5 @@ class Station
 
   def self.all
     @@stations
+  end
 end
