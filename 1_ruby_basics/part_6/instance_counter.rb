@@ -8,7 +8,7 @@ module InstanceCounter
     attr_accessor :instances
 
     def instances
-      @instances
+      @instances == nil ? @instances = 0 : @instances
     end
   end
 
