@@ -20,6 +20,9 @@ class Main
     station_name = gets.chomp
     @stations << Station.new(station_name)
     puts "Добавлена станция #{station_name}"
+  rescue => e
+    puts e.message
+    retry
   end
 
   def new_train
@@ -29,6 +32,9 @@ class Main
     type_train = gets.chomp.to_i
     @trains << PassengerTrain.new(number) if type_train == 1
     @trains << CargoTrain.new(number) if type_train == 2
+  rescue => e
+    puts e.message
+    retry
   end
 
   def new_route
@@ -37,6 +43,9 @@ class Main
     puts "Введите последнюю станцию маршрута: "
     last_station = gets.chomp
     @routes << Route.new(first_station, last_station)
+  rescue => e
+    puts e.message
+    retry
   end
 
   def add_route_station
