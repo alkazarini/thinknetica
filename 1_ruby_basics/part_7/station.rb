@@ -1,7 +1,9 @@
 require_relative './instance_counter.rb'
+require_relative './validation.rb'
 
 class Station
   include InstanceCounter
+  include Validation
   attr_reader :train_list, :name
 
   @@stations = []
@@ -9,6 +11,7 @@ class Station
   def initialize(name)
     @name = name
     @train_list = []
+    validate!
     @@stations << self
   end
 
@@ -30,5 +33,11 @@ class Station
 
   def self.all
     @@stations
+  end
+
+  protected
+
+  def validate!
+    raise "Некорректное имя станции. Должно быть не менее 3 символов." if @name !~ /^[\w]{3,}$/i
   end
 end

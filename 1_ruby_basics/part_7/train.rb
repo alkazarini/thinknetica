@@ -1,9 +1,11 @@
 require_relative './manufacturer.rb'
 require_relative './instance_counter.rb'
+require_relative './validation.rb'
 
 class Train
   include Manufacturer
   include InstanceCounter
+  include Validation
   attr_reader :length, :type, :station, :number, :speed
 
   @@trains = []
@@ -12,6 +14,7 @@ class Train
     @number = number
     @speed = 0
     @wagons = []
+    validate!
     @@trains << self
   end
 
@@ -62,5 +65,11 @@ class Train
 
   def to_s
     [number, type].join(" > ")
+  end
+
+  protected
+
+  def validate!
+    raise "Формат номера поезда: три латинские буквы или цифры, необязательный дефис и две латинские буквы или цифры" if @number !~ /^[a-z\d]{3}-?[a-z\d]{2}$/i
   end
 end

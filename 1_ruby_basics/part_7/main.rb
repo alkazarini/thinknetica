@@ -131,7 +131,6 @@ class Main
   public
 
   def menu
-
     choice = 0
 
     until choice == 13
@@ -168,7 +167,6 @@ class Main
       gets
     end
   end
-
 end
 
 execute = Main.new

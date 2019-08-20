@@ -1,11 +1,14 @@
 require_relative './instance_counter.rb'
+require_relative './validation.rb'
 
 class Route
   include InstanceCounter
+  include Validation
   attr_reader :stations
 
   def initialize(first, last)
     @stations = [first, last]
+    validate!
   end
 
   def add_station(station)
@@ -18,5 +21,11 @@ class Route
 
   def to_s
     [@stations].join(' > ')
+  end
+
+  protected
+
+  def validate!
+    raise "У маршрута должна быть начальная и конечная станции" if @stations.nil?
   end
 end
