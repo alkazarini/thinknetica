@@ -70,6 +70,10 @@ class Train
   protected
 
   def validate!
+    validate_number!
+  end
+
+  def validate_number!
     raise "Формат номера поезда: три латинские буквы или цифры, необязательный дефис и две латинские буквы или цифры" if @number !~ /^[a-z\d]{3}-?[a-z\d]{2}$/i
   end
 end

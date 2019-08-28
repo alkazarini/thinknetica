@@ -38,6 +38,10 @@ class Station
   protected
 
   def validate!
+    validate_name!
+  end
+
+  def validate_name!
     raise "Некорректное имя станции. Должно быть не менее 3 символов." if @name !~ /^[\w]{3,}$/i
   end
 end

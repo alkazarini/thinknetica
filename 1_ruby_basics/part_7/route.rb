@@ -26,6 +26,10 @@ class Route
   protected
 
   def validate!
+    validate_route!
+  end
+
+  def validate_route!
     raise "У маршрута должна быть начальная и конечная станции" if @stations.nil?
   end
 end
